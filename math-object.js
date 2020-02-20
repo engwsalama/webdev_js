@@ -21,6 +21,6 @@ val = Math.min(2,33,4,1,55,6,3,-2);
 val = Math.max(2,33,4,1,55,6,3,-2);
 val = Math.random(); // gives a random decicmal
 
-val = Math.floor(Math.random() * 20 + 1); // 20 is the max number you can reach plus 1, use floor to get an integer number 
+val = Math.floor(Math.random() * 20 + 1); // 20 is the max number you can reach plus 1, use floor to get an integer number  
 
 console.log(val);

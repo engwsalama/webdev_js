@@ -1,3 +1,5 @@
+// String Methods
+
 const firstName = 'Mostafa';
 const lastName = 'Ahmed";
 const age = 36;

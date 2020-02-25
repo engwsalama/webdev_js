@@ -1,4 +1,5 @@
 // Create element
+// this <li> element will not appear until put this element under <ul> as a child
 const li  = document.createElement('li');
 
 // Add class
@@ -13,6 +14,10 @@ li.setAttribute('title', 'New Item');
 // Create text node and append
 li.appendChild(document.createTextNode('Hello World'));
 
+// Append li as child to ul
+document.querySelector('ul.collection').appendChild(li);
+
+// the following to add font awesome icon
 // Create new link element
 const link = document.createElement('a');
 // Add classes
@@ -23,7 +28,7 @@ link.innerHTML = '<i class="fa fa-remove"></i>';
 // Append link into li
 li.appendChild(link);
 
-// Append li as child to ul
-document.querySelector('ul.collection').appendChild(li);
+// // Append li as child to ul
+// document.querySelector('ul.collection').appendChild(li);
 
 console.log(li);

@@ -56,6 +56,3 @@ document.querySelector('li:nth-child(4)').textContent = 'Hello World';
 
 document.querySelector('li:nth-child(odd)').style.background = '#ccc';
 document.querySelector('li:nth-child(even)').style.background = '#f4f4f4';
-
-
-

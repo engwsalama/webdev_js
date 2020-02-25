@@ -1,35 +1,46 @@
 // document.getElementsByClassName
 
-// const items = document.getElementsByClassName('collection-item');
-// console.log(items);
-// console.log(items[0]);
-// items[0].style.color = 'red';
-// items[3].textContent = 'Hello';
+/* this is a global selection
+  put this in the above of ul in html <div class="collection-item">test</div>
+*/
+const items = document.getElementsByClassName('collection-item');
+console.log(items);
+console.log(items[0]);
+items[0].style.color = 'red';
+items[3].textContent = 'Hello';
 
-// const listItems = document.querySelector('ul').getElementsByClassName('collection-item');
+// here is local selection based on ul
+const listItems = document.querySelector('ul').getElementsByClassName('collection-item');
 
-// console.log(listItems);
+console.log(listItems);
 
 // document.getElementsByTagName
-// let lis = document.getElementsByTagName('li');
-// console.log(lis);
-// console.log(lis[0]);
-// lis[0].style.color = 'red';
-// lis[3].textContent = 'Hello';
+let lis = document.getElementsByTagName('li');
+console.log(lis);
+console.log(lis[0]);
+lis[0].style.color = 'red';
+lis[3].textContent = 'Hello';
 
-// // Conver HTML Collection into array
-// lis = Array.from(lis);
+ // Conver HTML Collection into array
+lis = Array.from(lis);
 
-// lis.reverse();
+lis.reverse(); // before doing this you must convert lis to array by using Array.from() command
 
-// lis.forEach(function(li, index){
-//   console.log(li.className);
-//   li.textContent = `${index}: Hello`;
-// });
+lis.forEach(function(li, index){
+  console.log(li.className);
+  li.textContent = `${index}: Hello`;
+});
 
-// console.log(lis);
+console.log(lis);
 
-// document.querySelectorAll
+// document.querySelectorAll 
+/*====>
+
+- Here it will returns nodes list, 
+  - In this case the nodes list is an array and you don't need to use Array.from()
+
+  ====> */
+
 const items = document.querySelectorAll('ul.collection li.collection-item');
 
 items.forEach(function(item, index){

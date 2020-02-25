@@ -1,10 +1,10 @@
 let val;
 
-const list = document.querySelector('ul.collection');
+let list = document.querySelector('ul.collection');
 const listItem = document.querySelector('li.collection-item:first-child');
 
-val = listItem;
-val = list;
+
+
 
 // Get child nodes
 
@@ -32,3 +32,5 @@ val = list;
 // Get next sibling
 
 // Get prev sibling
+
+console.log(val);

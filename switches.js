@@ -45,4 +45,4 @@ switch(new Date().getDay()){
     break;
 }
 
-console.log(`Today is ${day}`);s
+console.log(`Today is ${day}`);

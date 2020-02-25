@@ -49,4 +49,4 @@ todo.delete = function(){
 
 todo.add();
 todo.edit(22);
-todo.delete();f
+todo.delete();

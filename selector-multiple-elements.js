@@ -1,3 +1,4 @@
+// Selector-Multiple-Element
 // document.getElementsByClassName
 
 /* this is a global selection

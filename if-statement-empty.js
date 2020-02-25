@@ -1,14 +1,11 @@
 // IF Statement and Logical Operators
 
-// if(something){
-//   do something
-// } else {
-//   do something else
-// }
+
 
 const id = 100;
 
 // EQUAL TO
+
 
 
 // NOT EQUAL TO

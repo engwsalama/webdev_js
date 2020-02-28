@@ -9,9 +9,12 @@ const taskInput = document.querySelector('#task');
 loadEventListeners();
 
 function loadEventListeners(){
-  // Add event task
+  // Add task event
 
   form.addEventListener('submit',addTask)
+
+  // Remove task event
+  taskList.addEventListener('click',removeTask);
   
 }
 

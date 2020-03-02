@@ -287,6 +287,86 @@ console.log(mostafa.hasOwnProperty('firstName'))... True
 console.log(mostafa.hasOwnProperty('isWorking'))... False
 
 
+============== Section6:Prototype Inheritance ================>
+
+Way#1:
+======
+// Person Constructor
+function Person(firstName,lastName){
+	this.firstName=firstName;
+	this.lastName = lastName;
+}
+
+Person.prototype.greeting = function(){
+	return `Hello there ${this.firstName} ${this.lastName}`
+}
+person1 = new Person('Ahmed','Mohamed');
+
+console.log(person1.greeting())
+
+Way#2: create customer constructor
+======
+
+// Customer Constructor
+
+function Customer(firstName,lastName,phone,membership){
+	Person.call(this,firstName,lastName);
+
+	this.phone=phone;
+	this.membership = membership;
+}
+
+// Create customer
+const customer1 = new Customer('Yasser','Zakaria','333-333-333','Gold');
+
+console.log(customer1)
+
+
+Way#3: Trying to call greeting() method
+========================================
+
+console.log(customer1.greeting()) ... will give an error 'greeting() method is not define
+
+Way#4: inherit the Person prototype methods
+========================================
+
+// Inherit the Person prototype methods 
+
+Customer.prototype = Object.create(Person.prototype);
+
+
+// Create customer
+const customer1 = new Customer('Yasser','Zakaria','333-333-333','Gold');
+console.log(customer1)
+
+console.log(customer1.greeting())
+
+
+Way#5: Make customer.prototype returns Customer()
+===============================================
+// Make customer.prototype returns Customer()
+
+Customer.prototype.constructor=Customer;
+
+
+Way#6: Customer greeting override
+=====================================
+// Customer greeting 
+Customer.prototype.greeting= function(){
+	return `Hello there ${this.firstName} ${this.lastName} welcome to our company`
+}
+console.log(customer1.greeting())
+
+
+
+but still any prototype is added to Person, will be inherited autmatically to Customer Object
+
+
+
+ 
+
+
+
 
 ============== Section: 5 ===================
 JavaScript Classes=====>
@@ -419,6 +499,12 @@ let admin = new Admin('ali@gmail.com','ali')
 let users = [userOne,userTwo,admin]
 admin.deleteUser(userOne);
 console.log(users);
+
+
+
+
+
+
 
 
 ===============================Reference Info =============

@@ -1,4 +1,7 @@
-============= Section1: this keyword ============================= what is 'this' keyword: it's quite a complex abstract idea but essentially the this keyword refers to whatever object currently owns that sapce that you use that this keyword in.
+
+OOP in ES5
+============= Section (1) : this keyword ============================= 
+what is 'this' keyword: it's quite a complex abstract idea but essentially the this keyword refers to whatever object currently owns that sapce that you use that this keyword in.
 
 way#1:
 ========
@@ -65,7 +68,7 @@ let myCar2 = {
 myCar2.logDriver();
 
 
-============== Section2: literal Object ===================
+============== Section (2) : literal Object ===================
 this is better if you are going to deal with one instant , not multip instances
 
 Encpasulation : we are capturing everything to do with the user here and we are containing it all together in one piece one object
@@ -92,7 +95,7 @@ console.log(userOne.name);
 userOne.login();
 userOne.logut();
 
-============== Section3: Updating Properites =====>
+============== Section (3) : Updating Properites ===========================>
 
 Way#1:by notation 
 ======
@@ -128,7 +131,7 @@ Note: ========> the professional way is to create all properties and methods in 
 
 
 
-===================== Section4: constructor function ==========>
+===================== Section (4) : constructor function ================================>
 
 if you want to make many copies of the following myCar object , you will make a hard copy with different numbers such as myCar1 , myCar2, myCar3,etc. , and then got to each copy and change its properties and methods , which is not logic?!!
 
@@ -166,7 +169,7 @@ let wael = new Person('wael','3-9-1967');
 console.log(wael.calcAge());
 console.log(wael.dob);
 
-============= Section5: Bult-in Constructor function =====>
+============= Section (5) : Bult-in Constructor function ===========================>
 
 // String
 
@@ -215,7 +218,7 @@ const re2 = new RegExp('\\w+');
 console.log(re2);
 
 
-============= Section5: Prototype ===================
+============= Section (6) : Prototype =================================>
 - Each object in JS has a prototype and a prototype is an object itself
 
 - All objects inherit theri properties and methods from their prototytype
@@ -287,7 +290,7 @@ console.log(mostafa.hasOwnProperty('firstName'))... True
 console.log(mostafa.hasOwnProperty('isWorking'))... False
 
 
-============== Section6:Prototype Inheritance ================>
+============== Section (7): Prototype Inheritance ================>
 
 Way#1:
 ======
@@ -363,29 +366,234 @@ but still any prototype is added to Person, will be inherited autmatically to Cu
 
 
 
- 
+============== Section (8) :Using Object Create ====================================> 
+
+Way#1:creating object
+======
+const personPrototypes={
+	greeting(){
+		return `Hello there ${this.firstName} ${this.lastName}`
+	}
+}
+
+const ahmed =Object.create(personPrototypes);
+
+ahmed.firstName = 'Ahmed';
+ahmed.lastName = 'Ali';
+console.log(ahmed);
+console.log(ahmed.greeting())
+
+Way#2: adding another prototype
+================================
+
+const personPrototypes={
+	greeting(){
+		return `Hello there ${this.firstName} ${this.lastName}`
+	},
+	getWorkingStatus(newStatus){
+		this.isWorking = newStatus;
+		return `The working Status of ${this.firstName} ${this.lastName} is ${this.isWorking}`
+	}
+}
+
+const ahmed =Object.create(personPrototypes);
+
+ahmed.firstName = 'Ahmed';
+ahmed.lastName = 'Ali';
+ahmed.isWorking = false;
+
+console.log(ahmed);
+
+console.log(ahmed.greeting())
+console.log(ahmed.getWorkingStatus(true))
+
+Way#3: // alternative way to create an Object
+============================================
+const personPrototypes={
+	greeting(){
+		return `Hello there ${this.firstName} ${this.lastName}`
+	},
+	getWorkingStatus(status){
+		this.isWorking = status;
+		return `The working Status of ${this.firstName} ${this.lastName} is ${this.isWorking}`
+	}
+}
+
+// alternative way to creat an Object
+
+const mostafa= Object.create(personPrototypes,{
+	firstName:{value:'Mostafa'},
+	lastName:{value:'Zakria'},
+	
+})
+	
+console.log(mostafa);
+console.log(mostafa.greeting())
+console.log(mostafa.getWorkingStatus(false));
+
+=====================================================
+	ES6+ , LET,STIRNG TEMPLATE,CLASSES
+	BABEL COMPILER TO CONVERT ES6 TO BE COMPATIBLE WITH OLD 
+	VERSION OF BROWSER 
+======================================================
 
 
+============== Section (9) : JavaScript Classes=========================>
+-By using ES6 , there is syntactic sugar. We didn't change the way of JS is working , but we change the way of writing object by using class.
 
+- JS is prototype based language
 
-============== Section: 5 ===================
-JavaScript Classes=====>
-refering to above userOne example , if i want to create different user objects , it will be difficult to make several copies of that object and change their properties and methods.
+- Classes do the same thing as prototypes in Javascript but some people think that classes are nicer or easier to work with.
 
-The better way to use something like that 
-userFour = new User(), and then passing the desired properties
-
-we can do this in a couple of different ways
-1- use the prototype model, in release es6 we gained a little syntactic sugar so that we can solve this problem using classes as well 
-
-classes do the same thing as prototypes in Javascript but some people think that classes are nicer or easier to work with.
-
-How to use Class?
+How to write class?
 =================
+Way#1:
+=======
+class Person {
+	constructor(firstName,lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+}
+
+mostafa = new Person('Mostafa','Yassin');
+
+console.log(mostafa);
+
+Way#2: adding prototype to above class
+=======================================
+class Person {
+	constructor(firstName,lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	greeting(){
+		return `Hello there ${this.firstName} ${this.lastName}`
+	}
+
+}
+
+mostafa = new Person('Mostafa','Yassin');
+
+console.log(mostafa);
+console.log(mostafa.greeting());
+
+
+Way#3: adding another prototype
+================================
+class Person {
+	constructor(firstName,lastName,dob){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthday = new Date(dob);
+	}
+	greeting(){
+		return `Hello there ${this.firstName} ${this.lastName}`
+	}
+	calculateAge(){
+		const diff = Date.now() -this.birthday.getTime()
+		const ageDate = new Date(diff);
+		return Math.abs(ageDate.getUTCFullYear()-1970);
+
+	}
+
+}
+
+const mostafa = new Person('Mostafa','Yassin','3/9/1980');
+
+console.log(mostafa);
+console.log(mostafa.greeting());
+console.log(mostafa.calculateAge());
+
+Way#4: Static method
+===========================
+- Static method is one that you can use without instantiating an object 
+
+- Instantiate this is what I mean when we create an object from a class.
+
+- Static method is kind of a standalone method
+
+class Person {
+	constructor(firstName,lastName,dob){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthday = new Date(dob);
+	}
+	greeting(){
+		return `Hello there ${this.firstName} ${this.lastName}`
+	}
+	calculateAge(){
+		const diff = Date.now() -this.birthday.getTime()
+		const ageDate = new Date(diff);
+		return Math.abs(ageDate.getUTCFullYear()-1970);
+
+	}
+	static addNumber(x,y){
+		return x+y;
+	}
+
+}
+
+const mostafa = new Person('Mostafa','Yassin','3/9/1980');
+console.log(mostafa.addNumber(1,1)); ... you will get an error
+console.log(Person.addNumber(1,1)); ... this will work fine
+
+========================Section (10) : sub-Classes [Inheritance]============================>
+
+Way#1: creating sub-class with properties and methods
+====================================================
+
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  greeting() {
+    return `Hello there ${this.firstName} ${this.lastName}`;
+  }
+}
+
+class Customer extends Person {
+  constructor(firstName, lastName, phone, membership) {
+    super(firstName, lastName);
+
+    this.phone = phone;
+    this.membership = membership;
+  }
+
+  static getMembershipCost() {
+    return 500;
+  }
+}
+
+const john = new Customer('John', 'Doe', '555-555-5555', 'Standard');
+
+console.log(john.greeting());
+
+console.log(Customer.getMembershipCost());
+
+Way#2: Creating sub-class with prototype method only
+==================================================
+
 class User{
 	constructor(email,name){
 		this.email = email;
 		this.name = name;
+		this.score = 0;
+	}
+	login(){
+		console.log(this.email, 'just logged in');
+		
+	}
+	logout(){
+		console.log(this.email, 'just logged out')
+		
+	}
+	updateScore(){
+		this.score++;
+		console.log(this.email,' score is now ',this.score);
 		
 	}
 }
@@ -393,48 +601,23 @@ class User{
 let userOne = new User('ahmed@gmail.com','hamed');
 let userTwo = new User('mostafa@gmail.com','Mostafa');
 
-console.log(userOne);
-console.log(userTwo);
-
-to create an object from above class
-1- the 'new' keyword
-2- creates a new empty object{}
-3- sets the value of 'this' to be the new empty object
-4- calls the constructor method
-
-
-
-============== Section: 6 ===================
-JavaScript Class Methods=====>
-
-- Wed do list our methods inside this user class, don't do it inside the constructor function 
-- constructor function just for the object properties
-
-so, we define our methods outside or the constructor
-
-class User{
-	constructor(email,name){
-		this.email = email;
-		this.name = name;	
+lass Admin extends User {
+	deleteUser(user){
+		function isUser(u) {
+			return u.email != user.email
+		}
+		users = users.filter(isUser)	
 	}
-	login(){
-		console.log(this.email , ' just logged in')
-		{
-	logout(){
-		console.log(this.email , ' just logged out')
-		{
-
 }
 
-let userOne = new User('ahmed@gmail.com','hamed');
-let userTwo = new User('mostafa@gmail.com','Mostafa');
 
-console.log(userOne);
-console.log(userTwo);
+let admin = new Admin('ali@gmail.com','ali')
+let users = [userOne,userTwo,admin]
+admin.deleteUser(userOne);
+console.log(users);
 
 
-============== Section: 7 ===================
-OOP JS - Method Chaining =====>
+============== Section (11): Method Chaining =====================================>
 
 Instead of type the following:
 ============================
@@ -475,30 +658,6 @@ let userTwo = new User('mostafa@gmail.com','Mostafa');
 
 userOne.login().updateScore().logout();
 
-
-
-
-============== Section: 8 ===================
-OOP JS - Class Inheritance =====>
-
-Now we have a User class that has many properties and methods that can be appliable for common users , but there are some special users has specials properties and methods such as Admin, Power User, etc., but still those special users have the same properties and methods as common users such as name, email, login, logout,etc 
-
-the above situation will be solved by using class inheritance as following:
-
-class Admin extends User {
-	deleteUser(user){
-		function isUser(u) {
-			return u.email != user.email
-		}
-		users = users.filter(isUser)	
-	}
-}
-
-
-let admin = new Admin('ali@gmail.com','ali')
-let users = [userOne,userTwo,admin]
-admin.deleteUser(userOne);
-console.log(users);
 
 
 

@@ -1,0 +1,493 @@
+============= Section1: this keyword ============================= what is 'this' keyword: it's quite a complex abstract idea but essentially the this keyword refers to whatever object currently owns that sapce that you use that this keyword in.
+
+way#1:
+========
+by using console.log(this) ... the output will refer to window object
+so ,it this stage window own 'this' keyword
+
+way#2:
+==========
+
+let myCar2 = {
+	maxSpeed:90,
+	driver: 'ahmed',
+	drive : function(){
+			console.log('dirving now again ')},
+	test: function(){
+		console.log(this);
+	}
+};
+
+myCar2.test() ... the output will refer to the current object which is myCar2
+
+
+Way#3:
+==========
+
+let myCar2 = {
+	maxSpeed:190,
+	driver: 'Ahmed',
+	drive : function(){
+			console.log('dirving now again ')},
+	test: function(){
+		console.log(this);
+	}
+};
+
+let myCar3 = {
+	maxSpeed:90,
+	driver: 'Mostafa',
+	drive : function(){
+			console.log('dirving now again ')},
+	test: function(){
+		console.log(this);
+	}
+};
+
+
+myCar2.test();
+myCar3.test();
+
+Way#4:
+=================
+
+let myCar2 = {
+	maxSpeed:190,
+	driver: 'Ahmed',
+	drive : function(){
+			console.log('dirving now again ')},
+	logDriver: function(){
+		console.log(` the Driver Name is: ${this.driver}`);
+	}
+};
+
+
+myCar2.logDriver();
+
+
+============== Section2: literal Object ===================
+this is better if you are going to deal with one instant , not multip instances
+
+Encpasulation : we are capturing everything to do with the user here and we are containing it all together in one piece one object
+or encapsulating what it means to be this user inside an object and now any kind of properties and methods that describe what it is to be a user , this user will live inside this object .
+
+so the literal meaning of encapsulation is to enclose a mixture of smoething inside a capsule 
+
+this encapsulation will help us to prevent use multiple different variables to catch individual values per each variable
+
+Way#1:
+=====
+
+let userOne ={
+	email:'mo@demo.com',
+	name: 'Mostafa',
+	login(){
+		console.log(this.email, 'just logged')
+	},
+	logut(){
+		console.log(this.email,'just loggod out')
+	}
+};
+console.log(userOne.name);
+userOne.login();
+userOne.logut();
+
+============== Section3: Updating Properites =====>
+
+Way#1:by notation 
+======
+userOne.name='Yasser';
+console.log(userOne.name);
+
+Way#2: by []
+======
+userOne['name']= 'Yasser'
+console.log(userOne['name']);
+
+Way#3: What is the purpose of using [] ?
+=========
+to make the calling to any property in object dynamic
+
+let prop= 'name';
+userOne[prop]; .. this will show the name property in this object
+
+let prop= 'email'
+userOne[prop]; .. this will show the email property in this object
+
+Note that ======> we could not use userOne.prop , because prop is a variable not a property inside the object
+
+
+Way#4: creating a property 
+============================
+
+userOne.age =30;
+userOne.logInfo = function() {console.log(`${this.email} ${this.name} is defined `)}
+userOne.logInfo();
+
+Note: ========> the professional way is to create all properties and methods in one place , and if there are null values , kept them inside the object until further alerting
+
+
+
+===================== Section4: constructor function ==========>
+
+if you want to make many copies of the following myCar object , you will make a hard copy with different numbers such as myCar1 , myCar2, myCar3,etc. , and then got to each copy and change its properties and methods , which is not logic?!!
+
+=================================================================
+The name of constructor function should start with capital letter
+=================================================================
+let myCar = {
+	maxSpeed:190,
+	driver: 'Ahmed',
+	drive : function(){
+			console.log('dirving now again ')},
+	logDriver: function(){
+		console.log(` the Driver Name is: ${this.driver}`);
+	}
+};
+
+
+The solution for that you use what is called constructor function
+
+What is the constructor function?
+it just a function that creates an object for us
+the constructor create an instant of object by 'new' keyword
+
+function Person(name,dob){
+	this.name = name;
+	this.dob = new Date(dob);
+	this.calcAge= function(){
+		const diff = Date.now()- this.dob.getTime();
+		const ageDate = new Date(diff);
+		return Math.abs(ageDate.getUTCFullYear()- 1970);
+	}
+}
+
+let wael = new Person('wael','3-9-1967');
+console.log(wael.calcAge());
+console.log(wael.dob);
+
+============= Section5: Bult-in Constructor function =====>
+
+// String
+
+const name1 = 'Jeff';
+const name2 = new String('Jeff');
+
+//name2.foo = 'bar';
+// console.log(name2);
+
+console.log(typeof name2);
+
+if(name2 === 'Jeff'){
+  console.log('YES');
+} else {
+  console.log('NO');
+}
+
+// Number
+const num1 = 5;
+const num2 = new Number(5);
+
+// Boolean
+const bool1 = true;
+const bool2 = new Boolean(true);
+
+// Function
+const getSum1 = function(x, y){
+  return x + y;
+}
+
+const getSum2 = new Function('x','y', 'return 1 + 1');
+
+// Object
+const john1 = {name: "John"};
+const john2 = new Object({name: "John"});
+console.log(john2);
+
+// Arrays
+const arr1 = [1,2,3,4];
+const arr2 = new Array(1,2,3,4);
+
+// Regular Expressions
+const re1 = /\w+/;
+const re2 = new RegExp('\\w+');
+
+console.log(re2);
+
+
+============= Section5: Prototype ===================
+- Each object in JS has a prototype and a prototype is an object itself
+
+- All objects inherit theri properties and methods from their prototytype
+
+- When you're dealing with objects literals then you're inherting from a prototype called Object.prototype .
+
+- We have :
+// Object.prototype
+// Person.prototype
+
+NOTE======>
+- Look to person constructor , you will find properties(firstName,lastName,dob) and methods (calculateAge)
+by observing , you can find that those(firstName,lastName,dob) should be actual properties of this object.
+- calculateAge however is going to be the same for every person, there's no difference in both ahmed and mostafa's calculateAge function , it's the same thing , it's going to return theri age, so this is something that we should put inside of the prototype nto directl into the object.
+
+Way#1:
+==========
+
+function Person(firstName,lastName,dob){
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.dob = new Date(dob);
+	// this.calculateAge= function(){
+	// 	const diff = Date.now()- this.dob.getTime();
+	// 	const ageDate = new Date(diff);
+	// 	return Math.abs(ageDate.getUTCFullYear()- 1970);
+	// }
+}
+
+// Calculate age 
+Person.prototype.calculateAge= function(){
+	const diff = Date.now()- this.dob.getTime();
+	const ageDate = new Date(diff);
+	return Math.abs(ageDate.getUTCFullYear()- 1970);
+}
+
+Person.prototype.getFullName = function (){
+	return `${this.firstName} ${this.lastName}`
+}
+
+
+const ahmed = new Person('Ahmed','Mohamed','10-2-80');
+const mostafa = new Person('Mostafa','Zaky','4-15-90');
+console.log(mostafa)
+console.log(mostafa.calculateAge());
+console.log(ahmed.getFullName());
+
+
+Way#2: Manipulate Data
+========================
+// Adding a new property to the Person object and change the value of one of its property
+
+Person.prototype.isWorking = false;
+Person.prototype.getWorking = function(status){
+	this.isWorking = status
+}
+
+
+
+console.log(mostafa.isWorking);
+mostafa.getWorking(true);
+console.log(mostafa.isWorking);
+
+
+Way#3: Working with Object Property
+=================================
+console.log(mostafa.hasOwnProperty('firstName'))... True
+
+console.log(mostafa.hasOwnProperty('isWorking'))... False
+
+
+
+============== Section: 5 ===================
+JavaScript Classes=====>
+refering to above userOne example , if i want to create different user objects , it will be difficult to make several copies of that object and change their properties and methods.
+
+The better way to use something like that 
+userFour = new User(), and then passing the desired properties
+
+we can do this in a couple of different ways
+1- use the prototype model, in release es6 we gained a little syntactic sugar so that we can solve this problem using classes as well 
+
+classes do the same thing as prototypes in Javascript but some people think that classes are nicer or easier to work with.
+
+How to use Class?
+=================
+class User{
+	constructor(email,name){
+		this.email = email;
+		this.name = name;
+		
+	}
+}
+
+let userOne = new User('ahmed@gmail.com','hamed');
+let userTwo = new User('mostafa@gmail.com','Mostafa');
+
+console.log(userOne);
+console.log(userTwo);
+
+to create an object from above class
+1- the 'new' keyword
+2- creates a new empty object{}
+3- sets the value of 'this' to be the new empty object
+4- calls the constructor method
+
+
+
+============== Section: 6 ===================
+JavaScript Class Methods=====>
+
+- Wed do list our methods inside this user class, don't do it inside the constructor function 
+- constructor function just for the object properties
+
+so, we define our methods outside or the constructor
+
+class User{
+	constructor(email,name){
+		this.email = email;
+		this.name = name;	
+	}
+	login(){
+		console.log(this.email , ' just logged in')
+		{
+	logout(){
+		console.log(this.email , ' just logged out')
+		{
+
+}
+
+let userOne = new User('ahmed@gmail.com','hamed');
+let userTwo = new User('mostafa@gmail.com','Mostafa');
+
+console.log(userOne);
+console.log(userTwo);
+
+
+============== Section: 7 ===================
+OOP JS - Method Chaining =====>
+
+Instead of type the following:
+============================
+userOne.login();
+userOne.logout();
+
+you can type the following:
+============================
+userOne.login().logout();
+
+but you must update the internal methods with 'return this';
+
+Way#1:
+======
+class User{
+	constructor(email,name){
+		this.email = email;
+		this.name = name;
+		this.score = 0;
+	}
+	login(){
+		console.log(this.email, 'just logged in');
+		return this;
+	}
+	logout(){
+		console.log(this.email, 'just logged out')
+		return this;
+	}
+	updateScore(){
+		this.score++;
+		console.log(this.email,' score is now ',this.score);
+		return this;
+	}
+}
+
+let userOne = new User('ahmed@gmail.com','hamed');
+let userTwo = new User('mostafa@gmail.com','Mostafa');
+
+userOne.login().updateScore().logout();
+
+
+
+
+============== Section: 8 ===================
+OOP JS - Class Inheritance =====>
+
+Now we have a User class that has many properties and methods that can be appliable for common users , but there are some special users has specials properties and methods such as Admin, Power User, etc., but still those special users have the same properties and methods as common users such as name, email, login, logout,etc 
+
+the above situation will be solved by using class inheritance as following:
+
+class Admin extends User {
+	deleteUser(user){
+		function isUser(u) {
+			return u.email != user.email
+		}
+		users = users.filter(isUser)	
+	}
+}
+
+
+let admin = new Admin('ali@gmail.com','ali')
+let users = [userOne,userTwo,admin]
+admin.deleteUser(userOne);
+console.log(users);
+
+
+===============================Reference Info =============
+syntactic sugar: "In computer science, syntactic sugar is syntax within a programming language that is designed to make things easier to read or to express. It makes the language "sweeter" for human use: things can be expressed more clearly, more concisely, or in an alternative style that some may prefer."
+
+Example of syntactic sugar :
+- Ternary:
+bool passed;
+if (mark >= 50) {
+    passed = true;
+} else {
+    passed = false;
+}
+
+bool passed = mark >= 50 ? true : false;
+
+- Switch Statment:
+if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u') {
+	puts("Letter IS a vowel");
+} else {
+	puts("Letter is NOT a vowel");
+}
+
+switch (letter) {
+case 'a': case 'e': case 'i': case 'o': case 'u':
+	puts("Letter IS a vowel");
+	break;
+default:
+	puts("Letter is NOT a vowel");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
